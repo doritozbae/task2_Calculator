@@ -23,7 +23,7 @@ export const digits = [
   "+/-",
   "%",
 ];
-export const mainActions = ["-", "+", "x", "÷", "xᵞ", "ᵞ√x"];
+export const mainActions = ["-", "+", "×", "÷", "xᵞ", "ᵞ√x"];
 export const additionalActions = ["x²", "x³", "³√x", "²√x", "10ᵡ", "1/x", "x!"];
 
 export const btnKeys = {
@@ -37,10 +37,4 @@ export const btnKeys = {
   zero: "0",
   percent: "%",
   plusMinus: "+/-",
-};
-
-export const stateKeys = {
-  firstOperand: "firstOperand",
-  secondOperand: "secondOperand",
-  operator: "operator",
 };

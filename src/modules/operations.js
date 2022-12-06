@@ -3,11 +3,26 @@ import {
   screen,
   digits,
   mainActions,
-  stateKeys,
   btnKeys,
   additionalActions,
 } from "./variables";
 import { errorAlert } from "./errors";
+import {
+  sum,
+  diff,
+  multiple,
+  divide,
+  xInY,
+  square,
+  cube,
+  tenInX,
+  yRootOfX,
+  percent,
+  rootOfX,
+  cubeRootOfX,
+  factorial,
+  minusOrPlusFunc,
+} from "./mathActions/mathActions";
 
 export const calculator = () => {
   let state = {
@@ -29,7 +44,6 @@ export const calculator = () => {
     state.secondOperand = "";
     state.operator = "";
     screen.innerText = 0;
-    // state.finish = false;
   }
 
   function screenResults(position) {
@@ -37,32 +51,37 @@ export const calculator = () => {
   }
 
   function onChangeState(val, position) {
-    state[position] += val;
-
-    const strValue = String(val);
+    // state[position] += val;
 
     switch (val) {
       case btnKeys.plusMinus:
-        state[position] = String(0 - state[position]);
+        state[position] = minusOrPlusFunc(state[position]);
         break;
       case btnKeys.percent:
-        state[position] = String(state[position] / 100);
+        state[position] = percent(state[position]);
+        break;
+      default:
+        String(state[position]) === 0 && val !== "."
+          ? (state[position] = String(val))
+          : (state[position] += String(val));
         break;
     }
 
     position === "operator" && state.operator
-      ? (state.operator = strValue)
+      ? (state.operator = String(val))
       : null;
     screenResults(position);
   }
 
+  // main logic of calculator, connection between UI and JS
   function calculatorLogic(val) {
     switch (val) {
       case btnKeys.clearAllBtn:
         clearState();
         break;
       case btnKeys.equal:
-        mathsFunction();
+        mathFunctions();
+        // screenResults(stateKeys.firstOperand);
         break;
       default:
         break;
@@ -87,71 +106,74 @@ export const calculator = () => {
 
     if (additionalActions.includes(val)) {
       state.operator = val;
-      mathsFunction();
+      mathFunctions();
       state.operator = "";
       screenResults("firstOperand");
     }
-
-    // if (state.secondOperand === '' && state.finish == true ) {state.secondOperand = state.firstOperand}
   }
 
-  function mathsFunction() {
-    const { firstOperand, secondOperand, operator } = state;
+  // appeal to math functions after pressing the "=" button
+  function mathFunctions() {
+    const { firstOperand, secondOperand } = state;
 
     switch (state.operator) {
-      case "+":
-        state.firstOperand = +firstOperand + +secondOperand;
+      case btnKeys.plus:
+        state.firstOperand = sum(+firstOperand, +secondOperand);
         break;
-      case "-":
-        state.firstOperand = firstOperand - secondOperand;
+      case btnKeys.minus:
+        state.firstOperand = diff(+firstOperand, +secondOperand);
         break;
-      case "x":
-        state.firstOperand = firstOperand * secondOperand;
+      case btnKeys.multiple:
+        state.firstOperand = multiple(+firstOperand, +secondOperand);
         break;
-      case "÷":
-        if (secondOperand === "0") {
-          errorAlert("na nol hyli delish");
+      case btnKeys.divide:
+        if (!secondOperand) {
+          errorAlert("ERROR: enter the divider");
+          clearState();
+        } else if (secondOperand == 0) {
+          errorAlert("ERROR: you cannot divide by 0");
+          clearState();
         }
-        secondOperand !== "0"
-          ? (state.firstOperand = +firstOperand / +secondOperand)
-          : (state.firstOperand = "");
+        state.firstOperand = divide(+firstOperand, +secondOperand);
         break;
       case "xᵞ":
-        state.firstOperand = (+firstOperand) ** +secondOperand;
+        state.firstOperand = xInY(+firstOperand, +secondOperand);
         break;
       case "ᵞ√x":
-        state.firstOperand = (+firstOperand) ** (1 / +secondOperand);
+        if (firstOperand < 0 && secondOperand % 2 === 0) {
+          errorAlert("ERROR: result doesn't exist");
+        }
+
+        if (secondOperand < 2) {
+          errorAlert("ERROR: result doesn't exist");
+        }
+        state.firstOperand = yRootOfX(+firstOperand, +secondOperand);
         break;
       case btnKeys.square:
-        state.firstOperand = (+firstOperand) ** 2;
+        state.firstOperand = square(+firstOperand);
         break;
       case "x³":
-        state.firstOperand = (+firstOperand) ** 3;
+        state.firstOperand = cube(+firstOperand);
         break;
       case "²√x":
-        console.log("aaaa");
-        state.firstOperand = (+firstOperand) ** (1 / 2);
+        // console.log("sqr x");
+        state.firstOperand = rootOfX(+firstOperand);
         break;
       case "³√x":
-        state.firstOperand = (+firstOperand) ** (1 / 3);
+        state.firstOperand = cubeRootOfX(+firstOperand);
         break;
       case "x!":
         state.firstOperand = factorial(+firstOperand);
-        state.secondOperand = "";
-        state.operator = "";
         break;
       case "10ᵡ":
-        state.firstOperand = 10 ** +firstOperand;
-        state.secondOperand = "";
-        state.operator = "";
+        state.firstOperand = tenInX(+firstOperand);
         break;
       case "1/x":
         state.firstOperand = 1 / +firstOperand;
-        state.secondOperand = "";
-        state.operator = "";
         break;
     }
+    state.secondOperand = "";
+    state.operator = "";
     screen.textContent = state.firstOperand;
-    state.finish = true;
   }
 };
