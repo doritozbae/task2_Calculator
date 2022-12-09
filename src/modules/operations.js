@@ -145,9 +145,6 @@ export const calculator = () => {
     if (state.memory !== "0") {
       mr.classList.add("pressed");
     }
-    // else {
-    //   mr.classList.remove("pressed");
-    // }
   }
 
   // appeal to math functions after pressing the "=" button
@@ -181,7 +178,6 @@ export const calculator = () => {
         if (firstOperand < 0 && secondOperand % 2 === 0) {
           errorAlert("ERROR: result doesn't exist");
         }
-
         if (secondOperand < 2) {
           errorAlert("ERROR: result doesn't exist");
         }
