@@ -5,6 +5,8 @@ import {
   mainActions,
   btnKeys,
   additionalActions,
+  memoryActions,
+  mr,
 } from "./variables";
 import { errorAlert } from "./errors";
 import {
@@ -29,7 +31,7 @@ export const calculator = () => {
     firstOperand: "",
     secondOperand: "",
     operator: "",
-    finish: false,
+    memory: "0",
   };
 
   btns.forEach((item) => {
@@ -46,10 +48,18 @@ export const calculator = () => {
     screen.innerText = 0;
   }
 
+  function clearMemory() {
+    mr.classList.remove("pressed");
+    screen.textContent = 0;
+    state.memory = "0";
+    console.log(state.memory);
+  }
+
   function screenResults(position) {
     screen.textContent = state[position];
   }
 
+  // work with state
   function onChangeState(val, position) {
     // state[position] += val;
 
@@ -59,6 +69,23 @@ export const calculator = () => {
         break;
       case btnKeys.percent:
         state[position] = percent(state[position]);
+        break;
+      case btnKeys.mMinus:
+        state.memory = diff(+state.memory, +state.firstOperand);
+        console.log(state.memory);
+        break;
+      case btnKeys.mPlus:
+        state.memory = sum(+state.memory, +state.firstOperand);
+        console.log(state.memory);
+        break;
+      case btnKeys.mr:
+        state.firstOperand && state.operator
+          ? (state.secondOperand = state[position])
+          : (state.firstOperand = state[position]);
+        console.log(state.memory);
+        break;
+      case btnKeys.mc:
+        clearMemory();
         break;
       default:
         String(state[position]) === 0 && val !== "."
@@ -76,7 +103,7 @@ export const calculator = () => {
   // main logic of calculator, connection between UI and JS
   function calculatorLogic(val) {
     switch (val) {
-      case btnKeys.clearAllBtn:
+      case btnKeys.ac:
         clearState();
         break;
       case btnKeys.equal:
@@ -110,6 +137,17 @@ export const calculator = () => {
       state.operator = "";
       screenResults("firstOperand");
     }
+
+    if (memoryActions.includes(val)) {
+      onChangeState(val, "memory");
+    }
+
+    if (state.memory !== "0") {
+      mr.classList.add("pressed");
+    }
+    // else {
+    //   mr.classList.remove("pressed");
+    // }
   }
 
   // appeal to math functions after pressing the "=" button

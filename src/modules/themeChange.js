@@ -1,9 +1,8 @@
-import { themeBtn } from "./variables";
+import { options, themeInput } from "./variables";
 
 const theme = {
   default: {
-    enabled: true,
-    bgColor: "#969191",
+    bgColor: "#686868",
     mainBtns: "rgb(117, 118, 119)",
     mainOp: "rgb(241, 162, 59)",
     extraOp: "rgb(90, 91, 92)",
@@ -11,13 +10,20 @@ const theme = {
     fontColor: "#e7e7e7",
   },
   pink: {
-    enabled: false,
-    bgColor: "#EDE4E0",
+    bgColor: "#FFDDD2",
     mainBtns: "#FFE3E1",
     mainOp: "#FFF5E4",
     extraOp: "#FFD1D1",
     main: "#FF9494",
     fontColor: "#FF9494",
+  },
+  mint: {
+    bgColor: "#EDE4E0",
+    mainBtns: "#BCEAD5",
+    mainOp: "#DEF5E5",
+    extraOp: "#9ED5C5",
+    main: "#8EC3B0",
+    fontColor: "#fff",
   },
 };
 
@@ -45,20 +51,23 @@ function changeSkeleton(color) {
   );
 }
 
-export function colorChange() {
-  if (theme.pink.enabled == false) {
-    theme.pink.enabled = true;
-    theme.default.enabled = false;
-    changeSkeleton("pink");
-  } else {
-    theme.default.enabled = true;
-    theme.pink.enabled = false;
-    changeSkeleton("default");
-  }
-}
-
 export function themeSwitcher() {
-  themeBtn.onclick = () => {
-    colorChange();
+  let dropdown = document.querySelector(".dropdown");
+  dropdown.onclick = function () {
+    dropdown.classList.toggle("active");
   };
+
+  options.forEach((item) => {
+    const option = item;
+    option.onclick = () => {
+      themeInput.value = option.innerText;
+      if (themeInput.value == "Pink Theme") {
+        changeSkeleton("pink");
+      } else if (themeInput.value == "Mint Theme") {
+        changeSkeleton("mint");
+      } else if (themeInput.value == "Dark Theme") {
+        changeSkeleton("default");
+      }
+    };
+  });
 }

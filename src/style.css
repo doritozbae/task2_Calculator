@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap");
 
 html {
-  --bgColor: #969191;
+  --bgColor: #686868;
   --mainBtns: rgb(117, 118, 119);
   --mainOp: rgb(241, 162, 59);
   --extraOp: rgb(90, 91, 92);
@@ -16,55 +16,15 @@ body {
   font-size: 30px;
 }
 
-sup {
-  top: -0.3em;
-  font-size: 55%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-.popup-box {
-  color: black;
-  width: 400px;
-  background-color: #eee;
-  padding: 30px;
-  font-size: 36px;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-  z-index: 10;
-  display: none;
-}
-.popup-box span {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  color: white;
-  padding: 5px;
-  border-radius: 50%;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .calculatorBody {
   overflow: hidden;
   margin: 0 auto;
-  margin-top: 250px;
+  margin-top: 230px;
   width: 564px;
   border: 1px solid var(--main);
   border-radius: 20px;
   background-color: var(--main);
-  box-shadow: 0px 6px 15px 0px rgb(54 0 0 / 15%);
+  box-shadow: 0px 6px 15px 0px rgba(29, 29, 29, 0.15);
 }
 
 .calculatorBody__themeBtn {
@@ -96,7 +56,6 @@ sup {
 
 .calculatorBody__btns {
   display: grid;
-  /* grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px; */
   grid-template-columns: 80px 80px 80px 80px 80px 80px 80px;
   grid-template-rows: 65px 65px 65px 65px 65px;
   grid-column-gap: 1px;
@@ -114,17 +73,13 @@ sup {
   background-color: var(--extraOp);
 }
 
+.pressed {
+  background-color: var(--mainBtns);
+}
+
 .btn:hover {
   opacity: 0.8;
   transition: 0.3s;
-}
-
-.numberBtnFont {
-  font-size: 26px;
-}
-
-.numberBtnFont sup {
-  font-size: 55%;
 }
 
 .mainOp {
@@ -137,4 +92,124 @@ sup {
 
 .n {
   grid-column: 4 / 6;
+}
+
+.popupShade {
+  position: absolute;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 8;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+}
+
+.popup-box {
+  color: black;
+  width: 400px;
+  background-color: #eee;
+  padding: 30px;
+  font-size: 36px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  z-index: 10;
+  display: none;
+}
+
+.popup-box span {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: rgb(36, 36, 36);
+  padding: 5px;
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup-box span:hover {
+  opacity: 0.5;
+}
+
+.dropdown {
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+  top: 35px;
+  left: 45%;
+  margin-top: 15px;
+  width: 160px;
+  height: 25px;
+}
+
+.dropdown::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  z-index: 10;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--main);
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transform: rotate(-45deg);
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.dropdown.active::before {
+  top: 15px;
+  transform: rotate(-225deg);
+}
+
+.dropdown input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: var(--main);
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+.dropdown .options {
+  position: absolute;
+  top: 55px;
+  width: 126%;
+  background: var(--main);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  display: none;
+}
+
+.dropdown.active .options {
+  display: block;
+}
+
+.dropdown .options p {
+  padding: 6px 20px;
+  cursor: pointer;
+}
+
+.dropdown .options div:hover {
+  background: #62baea;
+  color: #fff;
+}
+
+.text-box {
+  color: #eee;
 }

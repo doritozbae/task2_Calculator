@@ -8,14 +8,6 @@
     <title>Calculator</title>
   </head>
   <body>
-    <div class="popup-box">
-      <p></p>
-      <span>x</span>
-    </div>
-
-    <div class="calculatorBody__themeBtn">
-      <p>&#128512;</p>
-    </div>
     <section class="calculatorBody">
       <div class="calculatorBody__input-wrapper">
         <p class="calculatorBody__input">0</p>
@@ -24,7 +16,7 @@
         <!-- <div class="btn">mc</div> -->
         <div class="btn">m+</div>
         <div class="btn">mc</div>
-        <div class="btn">mr</div>
+        <div class="btn mr">mr</div>
         <div class="btn ac">AC</div>
         <div class="btn">+/-</div>
         <div class="btn">%</div>
@@ -67,6 +59,22 @@
         <!-- <div class="btn mainOp"></div> -->
       </div>
     </section>
+
+    <div class="popupShade"></div>
+
+    <div class="popup-box">
+      <p></p>
+      <span>x</span>
+    </div>
+
+    <div class="themeChanger dropdown">
+      <input class="text-box" type="text" placeholder="Theme" readonly />
+      <div class="options">
+        <p class="option">Dark Theme</p>
+        <p class="option">Mint Theme</p>
+        <p class="option">Pink Theme</p>
+      </div>
+    </div>
 
     <script src="index.js"></script>
   </body>
