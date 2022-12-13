@@ -6,7 +6,9 @@ export function errorAlert(errMessage) {
   errorMessage.textContent = errMessage;
 }
 
-errCloseBtn.onclick = function () {
-  errPopup.style.display = "none";
-  errBg.style.display = "none";
-};
+export function errorFunc() {
+  errCloseBtn.onclick = function () {
+    errPopup.style.display = "none";
+    errBg.style.display = "none";
+  };
+}

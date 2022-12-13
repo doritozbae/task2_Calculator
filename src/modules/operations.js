@@ -7,6 +7,7 @@ import {
   additionalActions,
   memoryActions,
   mr,
+  arrows,
 } from "./variables";
 import { errorAlert } from "./errors";
 import {
@@ -25,6 +26,7 @@ import {
   factorial,
   minusOrPlusFunc,
 } from "./mathActions/mathActions";
+import { undoRedoCommand } from "./undoRedo";
 
 export const calculator = () => {
   let state = {
@@ -32,6 +34,8 @@ export const calculator = () => {
     secondOperand: "",
     operator: "",
     memory: "0",
+    history: ["0"],
+    position: 0,
   };
 
   btns.forEach((item) => {
@@ -46,6 +50,8 @@ export const calculator = () => {
     state.secondOperand = "";
     state.operator = "";
     screen.innerText = 0;
+    state.history = ["0"];
+    state.position = 0;
   }
 
   function clearMemory() {
@@ -58,6 +64,8 @@ export const calculator = () => {
   function screenResults(position) {
     screen.textContent = state[position];
   }
+
+  const undoRedo = undoRedoCommand(state);
 
   // work with state
   function onChangeState(val, position) {
@@ -72,17 +80,17 @@ export const calculator = () => {
         break;
       case btnKeys.mMinus:
         state.memory = diff(+state.memory, +state.firstOperand);
-        console.log(state.memory);
+        // console.log(state.memory);
         break;
       case btnKeys.mPlus:
         state.memory = sum(+state.memory, +state.firstOperand);
-        console.log(state.memory);
+        // console.log(state.memory);
         break;
       case btnKeys.mr:
         state.firstOperand && state.operator
           ? (state.secondOperand = state[position])
           : (state.firstOperand = state[position]);
-        console.log(state.memory);
+        // console.log(state.memory);
         break;
       case btnKeys.mc:
         clearMemory();
@@ -110,25 +118,45 @@ export const calculator = () => {
         mathFunctions();
         // screenResults(stateKeys.firstOperand);
         break;
+      case btnKeys.undo:
+        undoRedo.value(undoRedo.undo());
+        // screen.textContent = state.history[state.position];
+        console.log(state.history[state.position]);
+        // state[position] = state.history[state.position]
+
+        break;
+      case btnKeys.redo:
+        undoRedo.value(undoRedo.redo());
+        // screen.textContent = state.history[state.position];
+
+        break;
+
       default:
         break;
     }
 
     if (digits.includes(val) && !state.operator) {
       onChangeState(val, "firstOperand");
+      undoRedo.increment(state.firstOperand);
+      console.log("oper", state.history, state.position);
     }
 
     if (digits.includes(val) && state.operator) {
       onChangeState(val, "secondOperand");
+      undoRedo.increment(state.secondOperand);
+      console.log("oper", state.history, state.position);
     }
 
     if (mainActions.includes(val) && state.firstOperand) {
       onChangeState(val, "operator");
+      undoRedo.increment(state.operator);
+      console.log("oper", state.history, state.position);
     }
 
     if (mainActions.includes(val) && state.secondOperand) {
       state.secondOperand = "";
       onChangeState(val, "operator");
+      undoRedo.increment(state.operator);
     }
 
     if (additionalActions.includes(val)) {
@@ -145,6 +173,10 @@ export const calculator = () => {
     if (state.memory !== "0") {
       mr.classList.add("pressed");
     }
+
+    // if (arrows.includes(val && !state.operator)) {
+    //   onChangeState(val, "firstOperand");
+    // }
   }
 
   // appeal to math functions after pressing the "=" button

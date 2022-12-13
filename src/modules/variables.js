@@ -31,6 +31,7 @@ export const digits = [
 export const memoryActions = ["mr", "mc", "m+", "m-"];
 export const mainActions = ["-", "+", "×", "÷", "xᵞ", "ᵞ√x"];
 export const additionalActions = ["x²", "x³", "³√x", "²√x", "10ᵡ", "1/x", "x!"];
+export const arrows = ["←", "→"];
 
 export const btnKeys = {
   ac: "AC",
@@ -47,4 +48,6 @@ export const btnKeys = {
   mc: "mc",
   mPlus: "m+",
   mMinus: "m-",
+  undo: "←",
+  redo: "→",
 };

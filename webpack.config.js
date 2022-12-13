@@ -4,13 +4,15 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "bundle.[chunghash].js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
   plugins: [
     new HTMLWebpackPlugin({
-      filename: "index.html",
-      template: "./src/index.html",
+      // filename: "index.html",
+      // template: "./src/index.html",
+      template: path.resolve(__dirname, "./src/index.html"),
     }),
   ],
   module: {
@@ -31,6 +33,10 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
+    modules: ["node_modules"],
   },
   devServer: {
     open: true,
