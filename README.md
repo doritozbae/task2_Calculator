@@ -35,20 +35,21 @@ The aim of this project was to create an advanced calculator. Application create
 
 Application has theme switcher. 
 
-### ** How to run the app: **
+
+### **How to run the app:**
 
 Clone this project to your comuter.
 In the project directory run:
-#### `npm install`
+### `npm install`
 
 After run 
-#### `npm start` 
+### `npm start` 
 
 Runs the app in the development mode. Open http://localhost:3000 to view it in your browser.
 
 You can also use following scripts:
 
-#### `npm test` 
+### `npm test` 
 Launches the test runner in the interactive watch mode.
 
 
