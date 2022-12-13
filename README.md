@@ -1,6 +1,6 @@
 # TASK №2: Advanced сalculator.  
 
-### :eyes: [Deploy link](https://doritozbae.github.io/task2_Calculatorr/)
+### [Deploy link](https://doritozbae.github.io/task2_Calculator/)
 ### [Task link](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4274c332-c3a6-4c58-b6bb-04e2d7860fa5/Innowise_Lab_Internship__Level_0__Custom_calculator_%281%29.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221213%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221213T192337Z&X-Amz-Expires=86400&X-Amz-Signature=84a1b584a60ebbc61c4ef2d099ec3bb902b21fbb53035e1f8fe83abdf8bb42fd&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Innowise%2520Lab%2520Internship_%2520Level%25200_%2520Custom%2520calculator%2520%281%29.pdf%22&x-id=GetObject)
 
 ### **Description:**
