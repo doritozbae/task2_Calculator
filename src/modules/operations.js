@@ -7,7 +7,7 @@ import {
   additionalActions,
   memoryActions,
   mr,
-  arrows,
+  // arrows,
 } from "./variables";
 import { errorAlert } from "./errors";
 import {
@@ -127,8 +127,6 @@ export const calculator = () => {
         break;
       case btnKeys.redo:
         undoRedo.value(undoRedo.redo());
-        // screen.textContent = state.history[state.position];
-
         break;
 
       default:
@@ -138,19 +136,19 @@ export const calculator = () => {
     if (digits.includes(val) && !state.operator) {
       onChangeState(val, "firstOperand");
       undoRedo.increment(state.firstOperand);
-      console.log("oper", state.history, state.position);
+      // console.log("oper", state.history, state.position);
     }
 
     if (digits.includes(val) && state.operator) {
       onChangeState(val, "secondOperand");
       undoRedo.increment(state.secondOperand);
-      console.log("oper", state.history, state.position);
+      // console.log("oper", state.history, state.position);
     }
 
     if (mainActions.includes(val) && state.firstOperand) {
       onChangeState(val, "operator");
       undoRedo.increment(state.operator);
-      console.log("oper", state.history, state.position);
+      // console.log("oper", state.history, state.position);
     }
 
     if (mainActions.includes(val) && state.secondOperand) {
@@ -173,10 +171,6 @@ export const calculator = () => {
     if (state.memory !== "0") {
       mr.classList.add("pressed");
     }
-
-    // if (arrows.includes(val && !state.operator)) {
-    //   onChangeState(val, "firstOperand");
-    // }
   }
 
   // appeal to math functions after pressing the "=" button

@@ -1,5 +1,4 @@
 import { errorAlert } from "../errors";
-// import { clearState } from "../operations";
 
 const max = 2 ** 53 - 1;
 const min = -(2 ** 53 - 1);
@@ -68,7 +67,6 @@ export const factorial = (x) => {
 };
 
 export const minusOrPlusFunc = (x) => {
-  // console.log(x);
   return 0 - x;
 };
 
@@ -88,5 +86,3 @@ const fixedResult = (res) => {
     return +res.toFixed(8);
   } else return +res;
 };
-
-// export { sum, diff };
